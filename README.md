@@ -9,4 +9,4 @@ In order for this to work:
 4. That's it.
 
 The database should have look like this.
-<img src="img/database1.png">
+<img src="img/database1.PNG">
