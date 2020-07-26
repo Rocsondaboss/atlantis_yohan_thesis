@@ -1,5 +1,3 @@
-<?php include('connect.php') ?>
-
 <!DOCTYPE html>
 <!-- saved from url=(0051)https://v4-alpha.getbootstrap.com/examples/navbars/ -->
 <html lang="en">
@@ -33,19 +31,8 @@
         <div class="col-sm-8 mx-auto">
           <h1>Register to the company</h1>
           <h4>to have an auto-ticketing system</h4>
-
-            <form action="registration.php" method="post" id="register_form">
-
+           <form id="" action="connect.php" method="post">
                     <div id="">
-
-                                    <?php if (isset($name_error)): ?>
-                                       <?php endif ?> 
-
-                                      <?php if(isset($name_error)): ?>
-                                       <span class="text-danger" style="font-size: 17px;"><?php echo $name_error; ?></span>
-                                        <?php endif ?>
-
-                                    
 
                                     <div class="form-group">
                                       <label for="userName" class="masthead-subheading font-weight-light mb-0">Username</label>
@@ -68,16 +55,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                      <label for="password" class="masthead-subheading font-weight-light mb-0">Confirm password</label>
-                                      <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
-                                    </div>
-
-                                    
-
-
-
-                                    <div class="form-group">
-                                      <label for="email" class="masthead-subheading font-weight-light mb-0">Email</label>
+                                      <label for="email" class="masthead-subheading font-weight-light mb-0">Email (optional)</label>
                                       <input type="text" class="form-control" id="email" name="email" placeholder="">
                                     </div>
 
@@ -113,16 +91,10 @@
                                     <div class="form-group">
                                     <label for="birthDate" class="masthead-subheading font-weight-light mb-0">Birth date</label>
                                      <input type="date" class="form-control" id="birthDate" name="birthDate" required>
-                                      </div>
-
-                                
                                     
                                     </div>
-                                    
-                                    <button class="btn btn-primary" type="submit" name="register" id="reg_btn">Register</button>
+                                    <input class="btn btn-primary" type="submit">
                                       </div>
-
-
 
                                     
 

@@ -8,7 +8,8 @@
 							gender  	= '$_POST[gender]',
 							lastName 	= '$_POST[lastName]',
 							email 		= '$_POST[email]',
-							balance		= '$_POST[balance]'
+							balance		= '$_POST[balance]',
+							rfidno		= '$_POST[rfidno]'
 
 									WHERE id='$_POST[id]'";
 			

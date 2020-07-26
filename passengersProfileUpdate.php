@@ -37,7 +37,7 @@ session_start();
 
 if($_SESSION["adminUserName"]) {
 ?>
-    <h6 style="text-align: right;">Welcome <?php echo $_SESSION["adminUserName"]; ?>. <a href="logout.php" tite="Logout">Log out.</a></h6>
+    <h6 style="text-align: right;">Welcome <?php echo $_SESSION["adminUserName"];?>. <a href="logout.php" tite="Logout">Log out.</a></h6>
 
 
 
@@ -45,7 +45,7 @@ if($_SESSION["adminUserName"]) {
 
       <div>
         <div>
-          <h1>Update</h1>
+          <h1><center>Update</center></h1>
           <p>
 
       <?php
@@ -66,6 +66,7 @@ if($_SESSION["adminUserName"]) {
       <th><center>E-mail</center></th>
       <th><center>Gender</center></th>
       <th><center>Balance</center></th>
+      <th><center>RFID No.</center></th>
       <th><center>Action</center></th>
     </tr>
 
@@ -80,13 +81,15 @@ if($_SESSION["adminUserName"]) {
 
         echo "<td><input class=form-control type=text name=email style='width:300px' value='".$row['email']."'></td>";
 
-         echo "<td><select id=gender name=gender class=form-control>
+        echo "<td><select id=gender name=gender class=form-control>
                       <option value= >".$row['gender']."</option>
                       <option value=Male>Male</option>
                       <option value=Female>Female</option>
                     </select></td>";
 
-          echo "<td><input class=form-control type=number style='width:79px' name=balance value='".$row['balance']."'></td>";
+        echo "<td><input class=form-control type=number style='width:79px' name=balance value='".$row['balance']."'></td>";
+
+        echo "<td><input class=form-control type=number style='width:160px' name=rfidno value='".$row['rfidno']."'></td>";
 
 
         echo "<input type=hidden name=id value='".$row['id']."'>";

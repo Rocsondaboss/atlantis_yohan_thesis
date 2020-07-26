@@ -26,7 +26,7 @@
       <div class="jumbotron">
         <div class="col-sm-8 mx-auto">
           <h1>Register</h1>
-           <p>Registration successful!</p>
+           <p style="background-color: green; text-align: center; color:white"><b>Registration successful!</b></p>
          
         </div>
       </div>
