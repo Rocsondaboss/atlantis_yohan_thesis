@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 ?>
 
 <?php
@@ -17,7 +18,7 @@ session_start();
     <meta name="author" content="">
     <link rel="icon" href="https://v4-alpha.getbootstrap.com/favicon.ico">
 
-    <title>Navbar Template for Bootstrap</title>
+    <title>View Records - Atlantis Yohan</title>
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/navbars/">
 
     <!-- Bootstrap core CSS -->
@@ -76,6 +77,7 @@ if($_SESSION["adminUserName"]) {
       <th style="width:250px;"><center>First name</center></th>
       <th style="width:250px;"><center>Last name</center></th>
       <th style="width:160px;"><center>E-mail</center></th>
+      <th style="width:160px;"><center>RFID #</center></th>
       <th style="width:160px;"><center>Balance</center></th>
     </tr>
    
@@ -91,6 +93,7 @@ if($_SESSION["adminUserName"]) {
             echo "<td style='text-align: center;'>".$row['firstName']."</td>";
             echo "<td style='text-align: center;'>".$row['lastName']."</td>";
             echo "<td style='text-align: center;'>".$row['email']."</td>";
+            echo "<td style='text-align: center;'>".$row['rfidno']."</td>";
             echo "<td style='text-align: center;'>₱ ".$row['balance']."</td>";
 
             echo "</form></tr>";

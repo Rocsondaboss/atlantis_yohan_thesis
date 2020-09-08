@@ -17,6 +17,9 @@
          
             <li class="nav-item active">
             <a class="nav-link" href="passengersProfilelogin.php">Passengers' profile <span class="sr-only">(current)</span></a>
+
+            <li class="nav-item active">
+            <a class="nav-link" href="passengersPayFare.php">Passenger's fare payment <span class="sr-only">(current)</span></a>
           </li>
 
 <!----

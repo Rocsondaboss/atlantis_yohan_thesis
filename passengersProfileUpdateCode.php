@@ -13,11 +13,6 @@
 
 									WHERE id='$_POST[id]'";
 			
-
-
-
-
-										 
 			if(mysqli_query($con, $sql))
 				header("refresh:1; url=passengersProfileUpdate.php");
 			else
