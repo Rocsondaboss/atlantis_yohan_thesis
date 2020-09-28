@@ -9,8 +9,6 @@
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
      
-
-
             <li class="nav-item active">
             <a class="nav-link" href="balance.php">Check your balance <span class="sr-only">(current)</span></a>
           </li>
@@ -20,6 +18,10 @@
 
             <li class="nav-item active">
             <a class="nav-link" href="passengersPayFare.php">Passenger's fare payment <span class="sr-only">(current)</span></a>
+          </li>
+
+          <li class="nav-item active">
+            <a class="nav-link" href="passengerReload.php">Reload<span class="sr-only">(current)</span></a>
           </li>
 
 <!----

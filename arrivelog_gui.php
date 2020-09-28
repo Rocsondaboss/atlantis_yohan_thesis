@@ -1,3 +1,8 @@
+
+
+
+
+
 <?php
 session_start();
 ?>
@@ -49,32 +54,25 @@ if($_SESSION["adminUserName"]) {
           <h1>Fare payment</h1>
  
 
-
 <?php include 'farePaymentNavBar.php' ?>
 
 
 <form method="post">
-<label style="font-size: 31px;font-family: Arial">Fare payment</label><br />
+<label style="font-size: 31px;font-family: Arial">Arrival log - Guimaras</label><br />
+
 <input type="text" name="rfidNoSearch" placeholder="Enter RFID #">
 <input type="submit" name="submit">
-<input type="reset" value="Reset">
+  
 </form>
 
+</body>
+</html>
 
-<!---
-<form method="post">
-  <select name="rfidNoSearch" id="cars">
-    <option value=""></option>
-    <option value="457904">457904</option>
-    <option value="457905">457905</option>
-  </select>
-  <input type="submit" name="submit">
-  </form>
-  --->
-
+<!--- for searching --->
 <?php
 
 $con = new PDO("mysql:host=localhost;dbname=test",'root','');
+
 if (isset($_POST["submit"])) {
   $str = $_POST["rfidNoSearch"];
   $sth = $con->prepare("SELECT * FROM `registration` WHERE rfidno = '$str'");
@@ -82,58 +80,47 @@ if (isset($_POST["submit"])) {
   $sth->setFetchMode(PDO:: FETCH_OBJ);
   $sth -> execute();
 
-  if(empty($str))
-      {
-        echo "<p style='color:red;'><b>Please enter valid RFID no.</b></p>";
-      }
-
-  elseif($row = $sth->fetch())
+  if($row = $sth->fetch())
   {
     ?>
     <br />
 
-<h1>Search</h1>
-<form action="isset - update.php" method="post">
-Passenger ID <textarea type="text" name="id" readonly><?php echo $row->id; ?></textarea>
-First name <textarea type="text" name="name" readonly><?php echo $row->firstName; ?></textarea>
-Last name <textarea type="text" name="name2" readonly><?php echo $row->lastName; ?></textarea>
-RFID <textarea type="text" name="rfidno" readonly><?php echo $row->rfidno; ?></textarea>
-Current balance <textarea type="text" name="currentbalance" readonly><?php echo $row->balance; ?></textarea>
-New balance <textarea type="text" id="demo" name="balance" readonly></textarea>
-Time of payment <textarea type="text" id="" name="paymentDate"><?php echo "" . date("Y/m/d") . ""; ?></textarea>
-
-Time of payment <textarea type="text" name="paymentTime"><?php date_default_timezone_set("Asia/Manila"); echo "" . date("h:i:sa"); ?></textarea>
-
-<button style="background-color: #4CAF50;padding: 15px 32px;" type="submit" name="update">Proceed to payment</button>
+          <form action="arrivalLog.php" method="post">
 
 
+            Passenger ID#:<br> <textarea type="text" name="passengerID" readonly="true"><?php echo $row->id; ?></textarea><br>
 
-</form>
+            First name:<br> <textarea type="text" name="name" readonly="true"><?php echo $row->firstName; ?></textarea><br>
 
-<script>
-var x = <?php echo $row->balance; ?>;
-var y = 50;
-var z = x - y;
-document.getElementById("demo").innerHTML =
-"" + z;
-</script>
+            Last name:<br> <textarea type="text" name="name2" readonly="true"><?php echo $row->lastName; ?></textarea><br>
 
-<script>
+            RFID #:<br> <textarea type="text" name="rfidno" readonly="true"><?php echo $row->rfidno; ?></textarea><br>
+
+            Name:<br> <textarea type="text" name="timeArrive" readonly="true"><?php echo "" . date("Y/m/d") . ""; ?> <?php date_default_timezone_set("Asia/Manila");
+echo "" . date("h:i:sa"); ?></textarea><br>
+
+                      <button style="background-color: #4CAF50;padding: 15px 32px;" type="submit" name="insert">Arrival log</button>
+          </form>
+
+
+
+
+
+          <script>
 var d = new Date();
-document.getElementById("time").innerHTML = d;
+document.getElementById("demo").innerHTML = d;
 </script>
 
+<!--------- search ends here ------>
 
 <?php 
     }
     else {
-      echo "<p style='color:red;'><b>RFID no. not found or invalid RFID!</b></p>";
+      echo "RFID # not found!";
         }
     }
 
 ?>
-
-
 
 
 
