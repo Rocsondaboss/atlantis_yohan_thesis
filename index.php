@@ -16,7 +16,7 @@
     <!-- Custom styles for this template -->
     <link href="./Navbar Template for Bootstrap_files/navbar.css" rel="stylesheet">
   </head>
-
+  
   <body style="background-image: url('img/port.jpg');">
 
      <?php include 'navSignUp.php'; ?>
@@ -25,10 +25,12 @@
 
       <div class="jumbotron">
         <div class="col-sm-8 mx-auto">
+          <center>
+          <img src="img/atlantis_yohan_logo.png" alt="" width="200" height="200">
           <h1>Welcome to Atlantis Yohan</h1>
           <h4>Auto ticketing system</h4>
           <p>Fort San Pedro, Iloilo City</p>
-          <p>
+          </center>
             
           </p>
         </div>
@@ -46,5 +48,5 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="./Navbar Template for Bootstrap_files/ie10-viewport-bug-workaround.js.download"></script>
   
-
+<?php include 'footer.php'; ?>
 </body></html>

@@ -168,6 +168,13 @@ li#infologin {
     font-weight: 600;
     color: #0062cc;
 }
+
+div#reloadinghistory {
+  background-color: #dbdbdb;
+  border-radius: 4px;
+  margin-top: 12px;
+  padding: 7px;
+}
 </style>
 
 <!---
@@ -192,21 +199,19 @@ li#infologin {
                                     <h4>
                                         <?php echo $_SESSION["firstName"]; ?> <?php echo $_SESSION["lastName"]; ?>
                                     </h4>
-                                   
-                                    <h7>
-                                        <?php echo $_SESSION["street"]; ?>, <?php echo $_SESSION["municipality"]; ?>, <?php echo $_SESSION["province"]; ?>
-                                    </h7>
-                                   
+                                    <!--- Caption -----
+                                    <h6>
+                                        Web Developer and Designer
+                                    </h6>
+                                    --->
                                    
                                     <!----  <p class="proile-rating">RANKINGS : <span>8/10</span></p> --->
 
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="passengersBalanceIndex.php" role="tab" aria-controls="profile" aria-selected="false">About</a>
                                 </li>
-                               <!---- <li class="nav-item">
-                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Reloading history</a>
-                                </li> -->
+                              
                             </ul>
                         </div>
                     </div>
@@ -218,47 +223,46 @@ li#infologin {
                     <div class="col-md-4">
                         <div class="profile-work">
 
+
                             <?php include 'userProfileLeftNav.php' ?>
+
+
       
                         </div>
                     </div>
                     <div class="col-md-8">
                         <div class="tab-content profile-tab" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>RFID</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p><?php echo $_SESSION["rfidno"]; ?></p>
-                                            </div>
+                                        <center><h5>Reloading history</h5></center>
 
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Birth date</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p><?php echo $_SESSION["birthDate"]; ?></p>
-                                            </div>
+                                        <?php
+  
+  $rfidno = $_SESSION["rfidno"];
 
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Your balance</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p class="currentBalance" style="font-size: 45px;background-color: grey;text-align: center;color:white;border-radius: 4px;">₱ <?php echo $_SESSION["balance"]; ?></p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Your total points</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p><?php echo $_SESSION["TotalPoints"]; ?></p> (<a href="redeem.php">Redeem</a>)
-                                            </div>
-                                        </div>
+  $conn = mysqli_connect("localhost", "root", "", "test");
+  if ($conn-> connect_error) {
+    die("Connect failed:". $conn->connect_error);
+  }
+
+  $sql = "SELECT historyID, passengerID, passengerName, rfidno, amount, reloadDate, refnum from reloadinghistory where rfidno='$rfidno' order by refnum desc";
+  $result = $conn-> query($sql);
+
+  if ($result-> num_rows > 0) {
+    while ($row = $result-> fetch_assoc()) {
+      echo "<div id='reloadinghistory'>";
+      echo "You loaded <b>Php ".$row["amount"] ."</b> into your balance on <b>".$row["reloadDate"] ."</b>. (Reference number: ".$row["refnum"] .")<br />";
+      echo "</div>";
+    }
+
+  }
+
+  else {
+    echo "You don't have any reload transactions. If you reload, your history will appear here.";
+  }
+
+  $conn-> close();
+  ?>
+
 
                                         
                             </div>
@@ -301,7 +305,6 @@ li#infologin {
                                             </div>
                                             <div class="col-md-6">
                                                 <p>6 months</p>
-
                                             </div>
                                         </div>
                                 <div class="row">
@@ -314,21 +317,13 @@ li#infologin {
                         </div>
                     </div>
                 </div>
-
-                
             </form>       
-
- </div>
 
 <!--- Meanwhile, this line indicates that if the user did not login, the passengers' record will not appeared unless the user logs in --->
 <?php
 }
 
-
-//else echo "<h4>Please <a href='balance.php'>login first</a> before viewing the passengers' record.</h4>";
-
- else
-    echo"<script language='javascript' type='text/javascript'>location.href='balance.php'</script>";
+else echo "<h4>Please <a href='balance.php'>login first</a> before viewing the passengers' record.</h4>";
 ?>
 
   

@@ -30,7 +30,11 @@ session_start();
 
 
 
-<?php include 'nav2.php'; ?>
+
+
+
+
+<?php include 'navSignUp.php'; ?>
 
   <?php
 

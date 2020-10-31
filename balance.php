@@ -9,10 +9,27 @@ if(count($_POST)>0) {
 
 $row  = mysqli_fetch_array($result);
 if(is_array($row)) {
+
 $_SESSION["id"] = $row['id'];
 $_SESSION["firstName"] = $row['firstName'];
+$_SESSION["lastName"] = $row['lastName'];
+$_SESSION["rfidno"] = $row['rfidno'];
+$_SESSION["birthDate"] = $row['birthDate'];
+$_SESSION["balance"] = $row['balance'];
+$_SESSION["TotalPoints"] = $row['TotalPoints'];
+$_SESSION["street"] = $row['street'];
+$_SESSION["email"] = $row['email'];
+$_SESSION["municipality"] = $row['municipality'];
+$_SESSION["province"] = $row['province'];
+$_SESSION["gender"] = $row['gender'];
 
-} else {
+
+
+
+
+}
+
+else {
 $message = "<h6 id='loginErrorMsg' style='background-color:red; color:white;'>Invalid username or password.</h6>";
 }
 
@@ -49,7 +66,7 @@ header("Location:passengersBalanceIndex.php");
 
   <body>
 
-  <?php include 'nav.php'; ?>
+     <?php include 'navSignUp.php'; ?>
 
   
 

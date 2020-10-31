@@ -1,25 +1,7 @@
 <?php
 session_start();
-$message="";
-if(count($_POST)>0) {
- $con = mysqli_connect('127.0.0.1:3306','root','','test') or die('Unable To connect');
-$result = mysqli_query($con,"SELECT * FROM admin WHERE
-              adminUser='" . $_POST["adminUser"] . "'
-              and adminPassword = '". $_POST["adminPassword"]."'");
-
-$row  = mysqli_fetch_array($result);
-if(is_array($row)) {
-$_SESSION["adminID"] = $row['adminID'];
-$_SESSION["adminUserName"] = $row['adminUserName'];
-
-} else {
-$message = "<h6 id='loginErrorMsg' style='background-color:red; color:white;'>Invalid username or password.</h6>";
-}
-}
-if(isset($_SESSION["adminID"])) {
-header("Location:passengersProfileIndex.php");
-}
 ?>
+
 
 
 <!DOCTYPE html>
@@ -46,28 +28,74 @@ header("Location:passengersProfileIndex.php");
 
   <body>
 
-  <?php include 'navSignUp.php'; ?>
+<style>
+.avatar {
+  vertical-align: middle;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
 
-  
+#currentBalance {
+  background-color: lightgrey;
+  width: 200px;
+  padding: 8px;
+  font-size: 45px;
+  text-align: center;
+}
+
+div#infologin {
+  text-align: right;
+  margin-right: 14px;
+
+}
+
+ul {
+  list-style-type: none;
+}
+
+li#infologin {
+  float: right;
+  margin-left: 4px;
+  background-color: yellow;
+  padding-left: 7px;
+  padding-right: 7px;
+  border-radius: 7px;
+}
+</style>
+
+
+
+<?php include 'navSignUp.php'; ?>
+
+  <?php
+
+
+if($_SESSION["firstName"]) {
+?>
+
+  <?php include 'userProfileHeader.php'; ?>
 
       <div class="jumbotron">
         <div class="col-sm-8 mx-auto">
-          <h1>Pleae login to check the passengers' profile</h1>
-          <h6><i>Note: Only the administrator can access this site.</i></h6>
-          
-         <form id="reg2" name="frmUser" method="post" action="" align="center">
 
-<div id="reg2" class="message"><?php if($message!="") { echo $message; } ?></div>
+          <h1>Information</h1>
 
- Admin username<br>
- <input type="text" class="form-control" name="adminUser">
- <br>
- Password<br>
-<input type="password" class="form-control" name="adminPassword">
-<br><br>
-<input type="submit" class="btn btn-primary" name="submit" value="Login">
-<input class="btn btn-primary" type="reset">
-</form>
+          <img src="img/unknown-person-icon-27.png" alt="Avatar" class="avatar">
+          <p>Passenger ID: <b><?php echo $_SESSION["id"]; ?></b></p>
+          <p>Name: <b><?php echo $_SESSION["firstName"]; ?> <?php echo $_SESSION["lastName"]; ?></b></p>
+          <p>RFID: <b><?php echo $_SESSION["rfidno"]; ?></b></p>
+          <p>Birth date: <b><?php echo $_SESSION["birthDate"]; ?></b></p>
+          <p>Your balance:
+            <div id="currentBalance">₱ <?php echo $_SESSION["balance"]; ?></div></p>
+
+            <p>Your total points:
+            <div id="currentBalance"><?php echo $_SESSION["TotalPoints"]; ?></div></p>
+
+
+
+
+
 
         </div>
       </div>
@@ -84,5 +112,16 @@ header("Location:passengersProfileIndex.php");
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="./Navbar Template for Bootstrap_files/ie10-viewport-bug-workaround.js.download"></script>
   
+
+<!--- Meanwhile, this line indicates that if the user did not login, the passengers' record will not appeared unless the user logs in --->
+<?php
+}
+
+
+else echo "<h4>Please <a href='balance.php'>login first</a> before viewing the passengers' record.</h4>";
+?>
+
+  
+
 
 </body></html>

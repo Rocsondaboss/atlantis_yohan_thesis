@@ -54,6 +54,8 @@
 							VALUES('$userName', '$firstName', '$lastName', '$password', '$email', '$street', '$municipality', '$province', '$gender', '$birthDate')";
 					$result = mysqli_query($db, $query) or die(mysqli_error($db));
 
+					
+
 					header('location: successful.php'); //redirects to this page should the registration successful
 
 					exit();

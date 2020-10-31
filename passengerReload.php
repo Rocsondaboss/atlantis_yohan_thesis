@@ -18,7 +18,7 @@ session_start();
     <meta name="author" content="">
     <link rel="icon" href="https://v4-alpha.getbootstrap.com/favicon.ico">
 
-    <title>Navbar Template for Bootstrap</title>
+    <title>Reload - Atlantis Yohan</title>
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/navbars/">
 
     <!-- Bootstrap core CSS -->
@@ -27,6 +27,9 @@ session_start();
     <!-- Custom styles for this template -->
     <link href="./Navbar Template for Bootstrap_files/navbar.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="mycustomstyle.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     
   </head>
 
@@ -34,7 +37,34 @@ session_start();
 
 
 
-<?php include 'nav.php'; ?>
+<?php include 'navSignUp.php'; ?>
+
+<style>
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+</style>
+<body style="text-align:center;">
 
   <?php
 
@@ -51,44 +81,10 @@ if($_SESSION["adminUserName"]) {
 <!------------------------------------------------------------------------------------->
 <!------------------------------------------------------------------------------------->
 
-<?php
-
-// php code to Update data from mysql database Table
-if(isset($_POST['update']))
-{
-    
-   $hostname = "localhost";
-   $username = "root";
-   $password = "";
-   $databaseName = "test";
-   
-   $connect = mysqli_connect($hostname, $username, $password, $databaseName);
-   
-   // get values form input text and number   
-   $id = $_POST['id'];
-   $balance = $_POST['balance'];
 
 
 
-   // mysql query to Update data
-   $query = "UPDATE `registration` SET `balance`= $balance
-                                        WHERE `id` = $id";
 
-   
-   $result = mysqli_query($connect, $query); 
-
-   if($result) {
-       echo '<center>The amount has been loaded to your account.</center>';
-   }
-
-   else {
-       echo 'Reloading error.';
-   }
-
-   mysqli_close($connect);
-}
-
-?>
 <center>
 	<p>Enter RFID no. to continue.</p>
 <form name="myForm4" onsubmit="return validRFID()" method="post">
@@ -102,12 +98,14 @@ if(isset($_POST['update']))
 <script>
 	function validRFID()
 {
+
 	var a = document.forms["myForm4"]["rfidNoSearch"].value;
   	if (a == "" || a == null)
    	 	{
     	alert("Please enter valid RFID no.");
    		 return false;
     	}
+      
 }
 
 	</script>
@@ -133,16 +131,31 @@ if (isset($_POST["submit"])) {
 
 
 
+
+
 <center>
-<form name="myForm" action="passengerReload.php" onsubmit="return validateForm()" method="post">
+<form name="myForm" action="passengerReloadConnect.php" onsubmit="return validateForm()" method="post">
 	Passenger ID
 	<br /><input type="text" name="id" readonly value='<?php echo $row->id; ?>'><br /><br />
 
-	Name<br /><p style="font-size: 25px;"><?php echo $row->firstName; ?> <?php echo $row->lastName; ?></p>
+	<!--- Name<br /><p style="font-size: 25px;"><?php echo $row->firstName; ?> <?php echo $row->lastName; ?></p> -->
 
-	RFID<br /><p style="font-size: 25px;"><?php echo $row->rfidno; ?></p>
+  Name<br /> <input type="text" name="passengerName" readonly value='<?php echo $row->firstName; ?> <?php echo $row->lastName; ?>'><br /><br />
+
+  Reload time<br /> <input type="text" name="reloadDate" readonly value='<?php echo "" . date("Y-m-d") . ""; ?> <?php date_default_timezone_set("Asia/Manila"); echo "" . date("h:i:sa"); ?>'><br /><br />
+
+	<!--- RFID<br /><p style="font-size: 25px;"><?php echo $row->rfidno; ?></p> --->
+
+  RFID<br /> <input type="text" name="rfidno" readonly value='<?php echo $row->rfidno; ?>'><br /><br />
+
+  Reference number<br /> <textarea type="text" name="refnum" id="refnum" readonly></textarea><br /><br />
 
 	Current balance<br /> <input type="text" name="cbalance" readonly value='<?php echo $row->balance; ?>'><br /><br />
+
+  Current total points earned<br /> <input type="text" name="CurrentTotalPoints" readonly value='<?php echo $row->TotalPoints; ?>'><br /><br />
+
+
+  Point value (<a style="text-decoration: none;"href="#" data-toggle="tooltip" data-placement="top" title="The current point value is being multiplied by the amount the user entered. The resulting points is added to the passenger's current total points earned.">?</a>)<br /> <input type="text" name="pointValue" readonly value="0.02"><br /><br />
 
 	<div id="boxindex" style="background-color: #03fc98;margin-left: 450px;margin-right:450px;">
 	Enter amount<br /> <input type="text" name="amount"><br /><br />
@@ -150,9 +163,14 @@ if (isset($_POST["submit"])) {
 	  <input type="button" class="btn btn-primary" name="" value="ADD" onclick="add()"><br/>
 
 	New balance<br /> <input type="text" name="balance" readonly><br /><br />
-	</div>
 
-<button id="mySelect" class="btn btn-primary" type="submit" name="update">Proceed to payment</button>
+
+  Points <br /> <input type="text" name="points" readonly><br /><br />
+
+  New total points <br /> <input type="text" name="TotalPoints" readonly><br /><br />
+  </div>
+
+<button id="mySelect" class="btn btn-primary" type="submit" name="update">Reload</button>
 </form>
 </center>
 
@@ -177,12 +195,34 @@ function validateForm()
 	}
 
 function add(){
-    cbalance=parseInt(myForm.cbalance.value);
-    amount=parseInt(myForm.amount.value);
+    cbalance=parseFloat(myForm.cbalance.value);
+    amount=parseFloat(myForm.amount.value);
+    pointValue=parseFloat(myForm.pointValue.value);
+    CurrentTotalPoints=parseFloat(myForm.CurrentTotalPoints.value);
+
     balance=cbalance+amount;
+    points=pointValue*amount;
+    TotalPoints=CurrentTotalPoints+points
+
+
     myForm.balance.value=balance;
+    myForm.points.value=points;
+    myForm.TotalPoints.value=TotalPoints;
+
+
 				}
+
+  // FOR REFERENCE NUMBER //
+    var dd = new Date();
+    var nn = dd.getTime();
+    document.getElementById("refnum").innerHTML = nn;
+
+    $(document).ready(function(){
+      $('[data-toggle="tooltip"]').tooltip();   
+    });
+
 </script>
+
 
 
 
@@ -232,7 +272,10 @@ function add(){
 }
 
 
-else echo "<h4>Please <a href='passengersPayFare.php'>login first</a> before viewing the passengers' record.</h4>";
+else 
+  //echo "<h4>Please <a href='passengersPayFare.php'>login first</a> before viewing the passengers' record.</h4>";
+
+  echo"<script language='javascript' type='text/javascript'>location.href='passengersPayFare.php'</script>";
 ?>
 
   

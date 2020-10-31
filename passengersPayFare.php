@@ -11,6 +11,7 @@ $row  = mysqli_fetch_array($result);
 if(is_array($row)) {
 $_SESSION["adminID"] = $row['adminID'];
 $_SESSION["adminUserName"] = $row['adminUserName'];
+//$_SESSION["mobileno"] = $row['mobileno'];
 
 } else {
 $message = "<h6 id='loginErrorMsg' style='background-color:red; color:white;'>Invalid username or password.</h6>";
@@ -47,7 +48,7 @@ header("Location:passengersPayFareIndex.php");
 
   <body>
 
-  <?php include 'nav.php'; ?>
+  <?php include 'navSignUp.php'; ?>
 
   
 

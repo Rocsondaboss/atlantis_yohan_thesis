@@ -1,25 +1,7 @@
 <?php
 session_start();
-$message="";
-if(count($_POST)>0) {
- $con = mysqli_connect('127.0.0.1:3306','root','','test') or die('Unable To connect');
-$result = mysqli_query($con,"SELECT * FROM admin WHERE
-              adminUser='" . $_POST["adminUser"] . "'
-              and adminPassword = '". $_POST["adminPassword"]."'");
-
-$row  = mysqli_fetch_array($result);
-if(is_array($row)) {
-$_SESSION["adminID"] = $row['adminID'];
-$_SESSION["adminUserName"] = $row['adminUserName'];
-
-} else {
-$message = "<h6 id='loginErrorMsg' style='background-color:red; color:white;'>Invalid username or password.</h6>";
-}
-}
-if(isset($_SESSION["adminID"])) {
-header("Location:passengersProfileIndex.php");
-}
 ?>
+
 
 
 <!DOCTYPE html>
@@ -46,28 +28,26 @@ header("Location:passengersProfileIndex.php");
 
   <body>
 
-  <?php include 'navSignUp.php'; ?>
 
-  
+
+<?php include 'navSignUp.php'; ?>
+
+  <?php
+
+
+if($_SESSION["firstName"]) {
+?>
+    <h6 style="text-align: right;">Welcome <?php echo $_SESSION["firstName"]; ?>. <a href="passengersBalanceLogout.php" tite="Logout">Log out.</a></h6>
+
+
+
+
 
       <div class="jumbotron">
         <div class="col-sm-8 mx-auto">
-          <h1>Pleae login to check the passengers' profile</h1>
-          <h6><i>Note: Only the administrator can access this site.</i></h6>
-          
-         <form id="reg2" name="frmUser" method="post" action="" align="center">
+          <h1>Your balance</h1>
+          <p>Under maintenance. Please come back later!!!</p>
 
-<div id="reg2" class="message"><?php if($message!="") { echo $message; } ?></div>
-
- Admin username<br>
- <input type="text" class="form-control" name="adminUser">
- <br>
- Password<br>
-<input type="password" class="form-control" name="adminPassword">
-<br><br>
-<input type="submit" class="btn btn-primary" name="submit" value="Login">
-<input class="btn btn-primary" type="reset">
-</form>
 
         </div>
       </div>
@@ -84,5 +64,16 @@ header("Location:passengersProfileIndex.php");
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="./Navbar Template for Bootstrap_files/ie10-viewport-bug-workaround.js.download"></script>
   
+
+<!--- Meanwhile, this line indicates that if the user did not login, the passengers' record will not appeared unless the user logs in --->
+<?php
+}
+
+
+else echo "<h4>Please <a href='balance.php'>login first</a> before viewing the passengers' record.</h4>";
+?>
+
+  
+
 
 </body></html>

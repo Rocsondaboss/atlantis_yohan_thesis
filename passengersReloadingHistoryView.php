@@ -18,7 +18,7 @@ session_start();
     <meta name="author" content="">
     <link rel="icon" href="https://v4-alpha.getbootstrap.com/favicon.ico">
 
-    <title>View Records - Atlantis Yohan</title>
+    <title>Reloading history - Atlantis Yohan</title>
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/navbars/">
 
     <!-- Bootstrap core CSS -->
@@ -29,7 +29,7 @@ session_start();
     <link rel="stylesheet" type="text/css" href="mycustomstyle.css">
   </head>
 
-  <body>
+  <body style="background-color: #d7f9fa">
 
 
 
@@ -48,13 +48,14 @@ if($_SESSION["adminUserName"]) {
 
       <div>
         <div>
-          <h1 style="text-align: center;">View records</h1>
+          <h1 style="text-align: center;">Reloading history</h1>
 
           <!--- For styling tables --->
           <style>
             table {
                 font-family: arial, sans-serif;
                 border-collapse: collapse;
+                
 
               }
 
@@ -62,7 +63,10 @@ if($_SESSION["adminUserName"]) {
                   border: 1px solid black;
                   text-align: left;
                   padding: 8px;
+
                 }
+
+
 
             tr:nth-child(even) {
                   background-color: #dddddd;
@@ -73,42 +77,70 @@ if($_SESSION["adminUserName"]) {
 
           <table>
     <tr>
+      <th style="width:250px;"><center>Reload ID</center></th>
+      <th style="width:250px;"><center>Passenger ID</center></th>
       <th style="width:250px;"><center>Name</center></th>
-      <th style="width:250px;"><center>First name</center></th>
-      <th style="width:250px;"><center>Last name</center></th>
-      <th style="width:160px;"><center>E-mail</center></th>
-      <th style="width:160px;"><center>RFID #</center></th>
-      <th style="width:160px;"><center>Balance</center></th>
-      <th style="width:160px;"><center>Total points<br/>earned</center></th>
+      <th style="width:250px;"><center>RFID</center></th>
+      <th style="width:250px;"><center>Amount loaded</center></th>
+      <th id="reload" style="width:250px;"><center>Reload time</center></th>
+      <th style="width:250px;"><center>Reference number</center></th>
+
     </tr>
-   
-    <?php
-      $sql            = "SELECT * FROM registration;";
-      $result         = mysqli_query($conn, $sql);
-      $resultCheck    = mysqli_num_rows($result);
-
-      if ($resultCheck > 0) {
-        while ($row = mysqli_fetch_assoc($result)) {
-
-            echo "<td style='text-align: center;'>".$row['userName']."</td>";
-            echo "<td style='text-align: center;'>".$row['firstName']."</td>";
-            echo "<td style='text-align: center;'>".$row['lastName']."</td>";
-            echo "<td style='text-align: center;'>".$row['email']."</td>";
-            echo "<td style='text-align: center;'>".$row['rfidno']."</td>";
-            echo "<td style='text-align: center;'>₱ ".$row['balance']."</td>";
-            echo "<td style='text-align: center;'>".$row['TotalPoints']."</td>";
 
 
-            echo "</form></tr>";
-        }
-      }
-          ?>
+<?php
+// connect to database
+$con = mysqli_connect('localhost','root','');
+mysqli_select_db($con, 'test');
+
+// define how many results you want per page
+$results_per_page = 10;
+
+// find out the number of results stored in database
+$sql='SELECT * FROM reloadinghistory';
+$result = mysqli_query($con, $sql);
+$number_of_results = mysqli_num_rows($result);
+
+// determine number of total pages available
+$number_of_pages = ceil($number_of_results/$results_per_page);
+
+// determine which page number visitor is currently on
+if (!isset($_GET['page'])) {
+  $page = 1;
+} else {
+  $page = $_GET['page'];
+}
+
+// determine the sql LIMIT starting number for the results on the displaying page
+$this_page_first_result = ($page-1)*$results_per_page;
+
+// retrieve selected results from database and display them on page
+$sql='SELECT * FROM reloadinghistory LIMIT ' . $this_page_first_result . ',' .  $results_per_page;
+$result = mysqli_query($con, $sql);
+
+if ($number_of_results > 0) {
+while($row = mysqli_fetch_array($result)) {
+  //echo $row['id'] . ' ';
+  // echo $row['alphabet']. '<br />';
+  echo "<td style='text-align: center;'>".$row['historyID']."</td>";
+  echo "<td style='text-align: center;'>".$row['passengerName']."</td>";
+  echo "<td style='text-align: center;'>".$row['passengerID']."</td>";
+  echo "<td style='text-align: center;'>".$row['rfidno']."</td>";
+  echo "<td style='text-align: right;'><b>P ".$row['amount']."</b></td>";
+  echo "<td style='text-align: center;'>".$row['reloadDate']."</td>";
+  echo "<td style='text-align: center;'>".$row['refnum']."</td>";
+
+  echo "</tr>";
+
+}
+    }
+
+for ($page=1;$page<=$number_of_pages;$page++) {
+  echo '<a class="btn btn-primary" href="passengersReloadingHistoryView.php?page=' . $page . '">' . $page . '</a> ';
+}
+
+?>
     </table>
-
-      <h4 style="text-align: center;"><a style="text-decoration: none" href="passengersProfileUpdate.php">Update</a></h1>
-
-
-
 
         </div>
       </div>

@@ -30,7 +30,7 @@ session_start();
 
 
 
-<?php include 'nav2.php'; ?>
+<?php include 'navSignUp.php'; ?>
 
   <?php
 
@@ -52,7 +52,7 @@ if($_SESSION["adminUserName"]) {
 
             <a href="passengersProfileUpdate.php"><img style="background-color: rgb(194, 224, 45); border-radius: 12px;" border="0" alt="Search" src="img/refresh.png" width="145" height="145"></a>
 
-            <a href="passengersProfileView.php"><img style="background-color: rgb(161, 222, 62); border-radius: 12px;" border="0" alt="Search" src="img/eye.png" width="145" height="145"></a>
+            <a href="passengersProfileSelect.php"><img style="background-color: rgb(161, 222, 62); border-radius: 12px;" border="0" alt="Search" src="img/eye.png" width="145" height="145"></a>
 
           </p>
 

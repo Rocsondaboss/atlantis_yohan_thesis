@@ -26,11 +26,26 @@ session_start();
     <link rel="stylesheet" type="text/css" href="mycustomstyle.css">
   </head>
 
+
+
   <body>
 
+          <style>
+      div#output {
+          background-color: lightgrey;
+          width: 835px;
+          padding: 24px;
+          border-radius: 4px;
+         /** border-style: solid; **/
+          margin-bottom: 2px;
+      }
+    </style>
 
 
-<?php include 'nav.php'; ?>
+
+
+
+<?php include 'navSignUp.php'; ?>
 
   <?php
 
@@ -78,22 +93,24 @@ if($_SESSION["adminUserName"]) {
             $street = $row['street'];
             $municipality = $row['municipality'];
             $province = $row['province'];
+            $rfidno = $row['rfidno'];
 
 
             $output .= 
-                  '<p><b>ID:</b> '.$id.'</p>
+
+                  '<div id="output"><p><b>ID:</b> '.$id.'</p>
                   <p><b>Name:</b> '.$fname.' '.$lname.'</p>
                   <p><b>Address:</b> '.$street.', '.$municipality.', '.$province.'</p>
-                  <p>---------</p>
-                  ';
+                  <p><b>RFID No.:</b> '.$rfidno.'</p>
+                  </div>';
           }
       }
 
   }
 ?>
 
-<form action="passengersProfileSearch.php" method="post">
-        <input type="text" class="form-control" name="search" placeholder="Search for passengers..."/>
+<form name="myForm4" action="passengersProfileSearch.php" onsubmit="return validSearch()" method="post">
+        <input type="text" class="form-control" name="search" placeholder="Search for passengers...">
 
         <input type="submit" class="btn btn-primary" value="Search" /> <a class="btn btn-primary" href="passengersProfileSearch.php" role="button">Clear</a>
 
@@ -101,7 +118,18 @@ if($_SESSION["adminUserName"]) {
 
     <?php print("$output");?> 
 
+<script>
+  function validSearch()
+{
+  var a = document.forms["myForm4"]["search"].value;
+    if (a == "" || a == null)
+      {
+      alert("Empty input. Please enter keyword first.");
+       return false;
+      }
+}
 
+  </script>
 
 
 
@@ -130,6 +158,6 @@ else echo "<h4>Please <a href='passengersProfilelogin.php'>login first</a> befor
 ?>
 
   
-
+<?php include 'footer.php'; ?>
 
 </body></html>
