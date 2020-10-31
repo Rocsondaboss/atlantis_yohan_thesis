@@ -8,5 +8,3 @@ In order for this to work:
 3. Import the "test.sql" into the localhost.
 4. That's it.
 
-The database should have look like this.
-<img src="img/database1.PNG">
