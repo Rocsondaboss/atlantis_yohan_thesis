@@ -13,9 +13,9 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="https://v4-alpha.getbootstrap.com/favicon.ico">
+    <link rel="icon" href="img/atlantis_yohan_logo.png">
 
-    <title>Navbar Template for Bootstrap</title>
+    <title>Search for passengers - Atlantis Yohan</title>
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/navbars/">
 
     <!-- Bootstrap core CSS -->
@@ -52,7 +52,7 @@ session_start();
 
 if($_SESSION["adminUserName"]) {
 ?>
-    <h6 style="text-align: right;">Welcome <?php echo $_SESSION["adminUserName"]; ?>. <a href="logout.php" tite="Logout">Log out.</a></h6>
+    <?php include 'user_session.php' ?>
 
 
 
@@ -77,6 +77,8 @@ if($_SESSION["adminUserName"]) {
                                            OR
                               lastName LIKE '%$searchq%'
                                            OR
+                              rfidno LIKE '%$searchq%'
+                                           OR
                               id LIKE '%$searchq%'") or die("Could not search");
 
       $count = mysqli_num_rows($query);
@@ -94,11 +96,14 @@ if($_SESSION["adminUserName"]) {
             $municipality = $row['municipality'];
             $province = $row['province'];
             $rfidno = $row['rfidno'];
+            $profile_img = $row['profile_img'];
 
 
             $output .= 
 
-                  '<div id="output"><p><b>ID:</b> '.$id.'</p>
+                  '<div id="output">
+                  
+                  <p><b>ID:</b> '.$id.'</p>
                   <p><b>Name:</b> '.$fname.' '.$lname.'</p>
                   <p><b>Address:</b> '.$street.', '.$municipality.', '.$province.'</p>
                   <p><b>RFID No.:</b> '.$rfidno.'</p>

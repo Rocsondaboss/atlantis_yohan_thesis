@@ -9,9 +9,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="https://v4-alpha.getbootstrap.com/favicon.ico">
+    <link rel="icon" href="img/atlantis_yohan_logo.png">
 
-    <title>Navbar Template for Bootstrap</title>
+    <title>Registration – Atlantis Yohan</title>
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/navbars/">
 
     <!-- Bootstrap core CSS -->
@@ -24,7 +24,7 @@
 
   <body>
 
-  <?php include 'nav.php'; ?>
+ <?php include 'navSignUp.php'; ?>
   
 
   
@@ -34,21 +34,21 @@
           <h1>Register to the company</h1>
           <h4>to have an auto-ticketing system</h4>
 
-            <form action="registration.php" method="post" id="register_form">
+            <form action="registration.php" name="reg" method="post" onsubmit="return confirmation()" id="register_form">
 
                     <div id="">
 
                                     <?php if (isset($name_error)): ?>
                                        <?php endif ?> 
 
-                                      <?php if(isset($name_error)): ?>
+                                    <?php if(isset($name_error)): ?>
                                        <span class="text-danger" style="font-size: 17px;"><?php echo $name_error; ?></span>
                                         <?php endif ?>
 
                                     
 
                                     <div class="form-group">
-                                      <label for="userName" class="masthead-subheading font-weight-light mb-0">Username</label>
+                                      Username
                                       <input type="text" class="form-control" id="userName" name="userName" required>
                                     </div>
 
@@ -64,15 +64,16 @@
 
                                      <div class="form-group">
                                       <label for="password" class="masthead-subheading font-weight-light mb-0">Password</label>
-                                      <input type="password" class="form-control" id="password" name="password" required>
+                                      <input type="password" class="form-control" id="password" name="password" minlength="6" required>
                                     </div>
 
                                     <div class="form-group">
                                       <label for="password" class="masthead-subheading font-weight-light mb-0">Confirm password</label>
-                                      <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+                                      <input type="password" class="form-control" id="password" name="confirmPassword" required>
                                     </div>
 
-                                    
+                                    <input type="checkbox" onclick="showPassword()">Show Password
+
 
 
 
@@ -101,19 +102,27 @@
                                           </tr>
                                       </table>
 
-                                    <div class="form-group">
+                                   <!--- <div class="form-group">
                                       <label for="gender" class="masthead-subheading font-weight-light mb-0">Gender</label>
-                                      <select id="gender" class="form-control" name="gender" required>
+                                      <select id="gender" class="form-control" name="gender">
                                           <option value=" "></option>
                                             <option value="Male">Male</option>
                                             <option value="Female">Female</option>
                                         </select>
-                                    </div>
+                                    </div> --->
+                                      <p>Gender</p>
+                                    <input type="radio" id="male" name="gender" value="male" required>
+                                      <label for="male">Male</label><br>
+                                    <input type="radio" id="female" name="gender" value="female" required>
+                                      <label for="female">Female</label><br>
+                                          
 
                                     <div class="form-group">
                                     <label for="birthDate" class="masthead-subheading font-weight-light mb-0">Birth date</label>
                                      <input type="date" class="form-control" id="birthDate" name="birthDate" required>
                                       </div>
+
+
 
                                 
                                     
@@ -121,12 +130,23 @@
                                     
                                     <button class="btn btn-primary" type="submit" name="register" id="reg_btn">Register</button>
                                       </div>
-
-
-
-                                    
-
                                 </form>
+
+                                <script>
+                                    
+                                    function showPassword() {
+                                           var x = document.getElementById("password");
+                                               if (x.type === "password") {
+                                           x.type = "text";
+                                           }
+                                           else
+                                           {
+                                              x.type = "password";
+                                            }
+                                                          }
+
+
+                                </script>
          
         </div>
       </div>

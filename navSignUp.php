@@ -20,7 +20,7 @@
           </li> --->
 
           <li class="nav-item active">
-            <a id="viewPass" class="nav-link" href="balance.php">Check balance<span class="sr-only">(current)</span></a>
+            <a id="viewPass" class="nav-link" href="balance.php">Passenger profile<span class="sr-only">(current)</span></a>
          
             <li class="nav-item active">
             <a id="viewPass" class="nav-link" href="passengersProfilelogin.php">View profile <span class="sr-only">(current)</span></a>
@@ -45,9 +45,9 @@
     --->
 
         </ul>
-         <div class="btn-group">
+       <!---  <div class="btn-group">
 <a class="btn btn-outline-primary" href="registration.php">Register</a>
-</div>
+</div> --->
 
       </div>
     </nav>

@@ -41,7 +41,7 @@
 				}
 
 				//password confirmation
-				if($password != $confirmPassword)
+				else if($password != $confirmPassword)
 				{
 					$name_error = "Password don't match";
 				}

@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="https://v4-alpha.getbootstrap.com/favicon.ico">
+    <link rel="icon" href="img/atlantis_yohan_logo.png">
 
-    <title>Navbar Template for Bootstrap</title>
+    <title>Welcome to Atlantis Yohan</title>
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/navbars/">
 
     <!-- Bootstrap core CSS -->
@@ -30,6 +30,7 @@
           <h1>Welcome to Atlantis Yohan</h1>
           <h4>Auto ticketing system</h4>
           <p>Fort San Pedro, Iloilo City</p>
+          <a class="btn btn-outline-primary" href="registration.php">Register</a>
           </center>
             
           </p>

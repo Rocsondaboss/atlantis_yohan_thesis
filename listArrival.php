@@ -1,10 +1,18 @@
-
-
-
 <?php
 session_start();
 ?>
 
+<?php
+	
+
+	$dbServername 	= "localhost";
+	$dbUsername		= "root";
+	$dbPassword		= "";
+	$dbName 		= "test";
+
+	$conn			= mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
+	
+?>
 
 
 <!DOCTYPE html>
@@ -16,9 +24,9 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="https://v4-alpha.getbootstrap.com/favicon.ico">
+      <link rel="icon" href="img/atlantis_yohan_logo.png">
 
-    <title>Navbar Template for Bootstrap</title>
+      <title>Arrival log - Atlantis Yohan</title>
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/navbars/">
 
     <!-- Bootstrap core CSS -->
@@ -41,33 +49,54 @@ session_start();
 
 if($_SESSION["adminUserName"]) {
 ?>
-    <h6 style="text-align: right;">Welcome <?php echo $_SESSION["adminUserName"]; ?>. <a href="logoutPayFare.php" tite="Logout">Log out.</a></h6>
+  
+    <?php include 'user_session.php' ?>
 
 
 
-
-
-      <div class="jumbotron">
-        <div class="col-sm-12 mx-auto">
-          <h1>Fare payment</h1>
- 
 
 
 <?php include 'farePaymentNavBar.php' ?>
 
-<style>
-	table {
-		border-collapse: collapse;
+      <div class="jumbotron">
+        <div class="col-sm-12 mx-auto">
+          <h1 style="text-align: center">Arrival log</h1>
+ 
+
+
+
+         <style>
+            table {
+                font-family: arial, sans-serif;
+                border-collapse: collapse;
 		width: 100%;
-		color: #588c7e;
-		font-family: monospace;
+		color: #4b42f5;
+		font-family: Arial;
 		font-size: 18px;
 		text-align: left;
-	}
+                
+
+              }
+
+            td, th {
+                  border: 1px solid black;
+                  text-align: left;
+                  padding: 8px;
+
+                }
+
+
+
+            tr:nth-child(even) {
+                  background-color: #dddddd;
+                }
+
+                
 	th {
-		background-color: #588c7e;
+		background-color: #3b992e;
 		color: white;
 	}
+
 	tr:nth-child(even) {background-color: #f2f2f2}
 
 	header {
@@ -75,64 +104,88 @@ if($_SESSION["adminUserName"]) {
 		font-size: 39px;
 
 	}
-</style>
 
-<header>Arrival log</header>
-<table>
-<tr>
-	<th>Arrival<br />ID</th>
-	<th>Passenger<br />ID</th>
-	<th>First<br />name</th>
-	<th>Last<br />name</th>
-	<th>RFID</th>
-	<th>Arrival time</th>
-</tr>
+	.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  grid-gap: 10px;
+  padding: 10px;
+}
+
+.grid-container > div {
+  font-size: 30px;
+}
+          </style>
+
+
+
+  <table>
+    <tr>
+      <th style="width:25px;"><center>Arrival ID</center></th>
+      <th style="width:25px;"><center>Passenger<br/>ID</center></th>
+      <th style="width:250px;"><center>Name</center></th>
+      <th style="width:250px;"><center>RFID</center></th>
+      <th style="width:250px;"><center>Payment date<br/>and time</center></th>
+    </tr>
+
 
 <?php
-	$conn = mysqli_connect("localhost", "root", "", "test");
-	if ($conn-> connect_error) {
-		die("Connect failed:". $conn->connect_error);
-	}
+// connect to database
+$con = mysqli_connect('localhost','root','');
+mysqli_select_db($con, 'test');
 
-	$sql = "SELECT arrivalID, passengerID, name, name2, rfidno, timeArrive from arrival";
-	$result = $conn-> query($sql);
+// define how many results you want per page
+$results_per_page = 10;
 
-	if ($result-> num_rows > 0) {
-		while ($row = $result-> fetch_assoc()) {
-			echo "<tr>      
-							<td>".$row["arrivalID"] ."</td>
-							<td>".$row["passengerID"] ."</td>
-							<td>".$row["name"] ."</td>
-							<td>".$row["name2"] ."</td>
-							<td>".$row["rfidno"] ."</td>
-							<td>".$row["timeArrive"] ."</td>
-				<tr>";
-		}
-		echo "</table>";
-	}
-	else {
-		echo "No result";
-	}
+// find out the number of results stored in database
+$sql='SELECT * FROM arrival';
 
-	$conn-> close();
-	?>
+$result = mysqli_query($con, $sql);
+$number_of_results = mysqli_num_rows($result);
 
+// determine number of total pages available
+$number_of_pages = ceil($number_of_results/$results_per_page);
 
+// determine which page number visitor is currently on
+if (!isset($_GET['page'])) {
+  $page = 1;
+} else {
+  $page = $_GET['page'];
+}
 
+// determine the sql LIMIT starting number for the results on the displaying page
+$this_page_first_result = ($page-1)*$results_per_page;
 
+// retrieve selected results from database and display them on page
+$sql='SELECT * FROM arrival LIMIT ' . $this_page_first_result . ',' .  $results_per_page;
+$result = mysqli_query($con, $sql);
 
-
-
-
-
-
-
-
-
-
+if ($number_of_results > 0) {
+while($row = mysqli_fetch_array($result)) {
+  //echo $row['id'] . ' ';
+  // echo $row['alphabet']. '<br />';
+  	echo "<td style='text-align: center;'>".$row['arrivalID']."</td>";
+echo "<td style='text-align: center;'>".$row['passengerID']."</td>";
+echo "<td style='text-align: center;'>".$row['name2'].", ".$row['name']."</td>";
+echo "<td style='text-align: center;'>".$row['rfidno']."</td>";
+echo "<td style='text-align: center;'>".$row['timeArrive']."</td>";
 
 
+  echo "</tr>";
 
+}
+    }
+
+for ($page=1;$page<=$number_of_pages;$page++) {
+  echo '<a class="btn btn-primary" href="listArrival.php?page=' . $page . '">' . $page . '</a> ';
+}
+
+?>
+    </table>
+
+        </div>
+      </div>
+    </div>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

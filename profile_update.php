@@ -2,7 +2,7 @@
 session_start();
 ?>
 
-
+<?php include('passengerUpdateProfile.php') ?>
 
 <!DOCTYPE html>
 <!-- saved from url=(0051)https://v4-alpha.getbootstrap.com/examples/navbars/ -->
@@ -179,94 +179,52 @@ li#infologin {
 <!------ Include the above in your HEAD tag ---------->
 
 <div class="container emp-profile">
+
   <center>
-         <h2>Redeem</h2>
-         <p><b><?php echo $_SESSION["firstName"]; ?> <?php echo $_SESSION["lastName"]; ?></b><br/>
-          <p><a class="btn btn-primary" href="passengersBalanceLogout.php">Log out</a></p>
-         <p>Current points: <b><?php echo $_SESSION["TotalPoints"]; ?></b></p>
+    <form action="profile_update.php" method="post">
+      <h2>Update your profile</h2>
+                                    <?php if (isset($name_error)): ?>
+                                       <?php endif ?> 
 
-  <form name="cal" action="passengerRedeemConnect.php" onsubmit="return checkBalance()" method="post">
-    <!----Explanation: At "cal.balance.value", "cal" is the name of the form and "balance" is the name of the database column --->
-<p>
-  Select amount you want to redeem:<br>
-<button class="button button2" type="button" onclick="redeem50()"> <b>50</b><br>25 points </button>
+                                    <?php if(isset($name_error)): ?>
+                                       <span class="text-danger" style="font-size: 17px;"><?php echo $name_error; ?></span>
+                                        <?php endif ?>
 
-<button class="button button2" type="button" onclick="redeem100()"> <b>100</b><br>50 points </button>
+      <br />
+    <!----- <img src='<?php echo $_SESSION["profile_img"]; ?>' alt="" width="220px"/><br /> ---->
+    <b>ID</b><br />
+    <input type="text" name="id" value="<?php echo $_SESSION["id"]; ?>" readonly><br />
 
-<button class="button button2" type="button" onclick="redeem200()"> <b>200</b><br>75 points </button>
+    <b>First name</b><br />
+    <input type="text" name="firstName" value="<?php echo $_SESSION["firstName"]; ?>" ><br />
 
-<br />
-<p id="confirm" style="color:green; font-weight:bold;"></p>
+    <b>Last name</b><br />
+    <input type="text" name="lastName" value="<?php echo $_SESSION["lastName"]; ?>"><br />
 
-Your current balance is: Php <b><?php echo $_SESSION["balance"]; ?></b></p>
+    <b>Email</b><br />
+    <input type="text" name="email" value="<?php echo $_SESSION['email']; ?>"><br />
+
+    <b>Address</b><br />
+    <b>Street</b>
+    <input type="text" name="street" value="<?php echo $_SESSION['street']; ?>">
+
+    <b>Municipality</b>
+    <input type="text" name="municipality" value="<?php echo $_SESSION['municipality']; ?>">
+
+    <b>Province</b>
+    <input type="text" name="province" value="<?php echo $_SESSION['province']; ?>"><br />
+
+    <b>Gender</b>
+    <input type="radio" id="male" name="gender" value="male">
+      <label for="male">Male</label>
+    <input type="radio" id="female" name="gender" value="female">
+      <label for="female">Female</label><br /><br />
 
 
-  Total points<br />
-  <input type="text" id="TP" name="TotalPoints" value='' readonly><br />
+    <button id="mySelect" class="btn btn-primary" type="submit" name="update">Update</button>
 
-  Balance<br />
-  <input type="text" id="demo" name="balance" readonly><br />
-
-  ID<br /><input type="text" name="id" readonly value='<?php echo $_SESSION["id"]; ?>'><br /><br />
-
-  RFID<br /> <input type="text" name="rfidno" readonly value='<?php echo $_SESSION["rfidno"]; ?>'><br /><br />
-
-  <button class="btn btn-primary" type="submit" name="update">Redeem</button>
-</center>
   </form>
-
-
-<script>
-  function redeem50() {
-    document.getElementById('confirm').innerHTML = 'You redeem P50 to your balance.';
-
-    var x = <?php echo $_SESSION["balance"]; ?> + 50;
-    document.getElementById('demo').innerHTML = cal.balance.value=x;
-
-    var y = <?php echo $_SESSION["TotalPoints"]; ?> - 25;
-    document.getElementById('TP').innerHTML = cal.TotalPoints.value=y;
-  }
-
-  function redeem100() {
-    document.getElementById('confirm').innerHTML = 'You redeem P100 to your balance.';
-
-    var x = <?php echo $_SESSION["balance"]; ?> + 100;
-    document.getElementById('demo').innerHTML = cal.balance.value=x; 
-
-    var y = <?php echo $_SESSION["TotalPoints"]; ?> - 50;
-    document.getElementById('TP').innerHTML = cal.TotalPoints.value=y;
-
-  }
-
-  function redeem200() {
-    document.getElementById('confirm').innerHTML = 'You redeem P200 to your balance.';
-
-    var x = <?php echo $_SESSION["balance"]; ?> + 200;
-    document.getElementById('demo').innerHTML = cal.balance.value=x; 
-
-    var y = <?php echo $_SESSION["TotalPoints"]; ?> - 75;
-    document.getElementById('TP').innerHTML = cal.TotalPoints.value=y;
-
-  }
-
-  function checkBalance() {
-    // Check if the user has click the redeem amount.
-    var a = document.forms["cal"]["TotalPoints"].value;
-    if (a == "" || a == null)
-      {
-      alert("Please select the amount you want to redeem.");
-       return false;
-      }
-
-    // Check if the user's total points have a sufficient amount, otherwise if the number reaches negative result, the user cannot redeem.
-    var a = document.forms["cal"]["TotalPoints"].value;
-    if (a < 0)
-      {
-      alert("You have insufficient points.");
-       return false;
-      }
-  }
-</script>
+  </center>
 
 <!---
   <form name="cal">

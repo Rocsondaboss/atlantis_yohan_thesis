@@ -1,0 +1,184 @@
+Passenger ID :56
+RFID :11087051
+Amount :999
+Reload time :2020-11-08 01:05:44pm
+
+Passenger ID : 62
+RFID : 678909
+Amount : 1459
+Reload time : 2020-11-08 01:06:24pm
+
+Passenger ID : 60
+Name : Eileen S. Kelly
+RFID : 12806721
+Amount : ₱100
+Reload time : 2020-11-08 01:16:09pm
+
+Passenger ID : 59
+Name : Richard C. Howard
+RFID : 808591
+Amount : Php 590
+Reload time : 2020-11-08 01:18:37pm
+
+********************************************
+Passenger ID : 65
+Name : Raymond C. Pate
+RFID : 900899
+Amount : Php 500
+Reload time : 2020-11-08 01:22:41pm
+
+********************************************
+Passenger ID : 65
+Name : Raymond C. Pate
+RFID : 900899
+Amount : Php 69
+Reload time : 2020-11-08 01:23:23pm
+
+******************************************** 
+Passenger ID : 65
+Name : Raymond C. Pate
+RFID : 900899
+Amount : Php 88
+Reload time : 2020-11-08 01:25:14pm
+
+********************************************
+Passenger ID : 62
+Name : Alberto Mangapit
+RFID : 678909
+Amount : Php 67
+Reload time : 2020-11-09 05:38:28pm
+
+********************************************
+Passenger ID : 
+Name : 
+RFID : 
+Amount : Php 
+Reload time : 
+
+********************************************
+Passenger ID : 62
+Name : Alberto Mangapit
+RFID : 678909
+Amount : Php 56
+Reload time : 2020-11-09 05:39:27pm
+
+********************************************
+Passenger ID : 
+Name : 
+RFID : 
+Amount : Php 
+Reload time : 
+
+********************************************
+Passenger ID : 62
+Name : Alberto Mangapit
+RFID : 678909
+Amount : Php 56
+Reload time : 2020-11-09 05:41:01pm
+
+********************************************
+Passenger ID : 
+Name : 
+RFID : 
+Amount : Php 
+Reload time : 
+
+********************************************
+Passenger ID : 62
+Name : Alberto Mangapit
+RFID : 678909
+Amount : Php 56
+Reload time : 2020-11-09 06:20:18pm
+
+********************************************
+Passenger ID : 62
+Name : Alberto Mangapit
+RFID : 678909
+Amount : Php 45
+Reload time : 2020-11-09 09:21:36pm
+
+********************************************
+Passenger ID : 
+Name : 
+RFID : 
+Amount : Php 
+Reload time : 
+
+********************************************
+Passenger ID : 
+Name : 
+RFID : 
+Amount : Php 
+Reload time : 
+
+********************************************
+Passenger ID : 
+Name : 
+RFID : 
+Amount : Php 
+Reload time : 
+
+********************************************
+Passenger ID : 
+Name : 
+RFID : 
+Amount : Php 
+Reload time : 
+
+********************************************
+Passenger ID : 
+Name : 
+RFID : 
+Amount : Php 
+Reload time : 
+
+********************************************
+Passenger ID : 
+Name : 
+RFID : 
+Amount : Php 
+Reload time : 
+
+********************************************
+Passenger ID : 
+Name : 
+RFID : 
+Amount : Php 
+Reload time : 
+
+********************************************
+Passenger ID : 
+Name : 
+RFID : 
+Amount : Php 
+Reload time : 
+
+********************************************
+Passenger ID : 56
+Name : Nita A. Pride
+RFID : 11087051
+Amount : Php 56
+Reload time : 2020-11-11 11:58:46am
+
+********************************************
+Passenger ID : 55
+Name : Lance Shay
+RFID : 10818594
+Amount : Php 1000
+Reload time : 2020-11-11 12:09:31pm
+
+********************************************
+Passenger ID : 55
+Name : Lance Shay
+RFID : 10818594
+Amount : Php 2000
+Reload time : 2020-11-11 12:22:14pm
+
+********************************************
+Passenger ID : 56
+Name : Nita A. Pride
+RFID : 11087051
+Amount : Php 1000
+Reload time : 2020-11-11 01:56:23pm
+
+********************************************

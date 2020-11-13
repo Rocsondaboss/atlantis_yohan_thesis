@@ -13,9 +13,9 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="https://v4-alpha.getbootstrap.com/favicon.ico">
+    <link rel="icon" href="img/atlantis_yohan_logo.png">
 
-    <title>Navbar Template for Bootstrap</title>
+    <title>Update - Atlantis Yohan</title>
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/navbars/">
 
     <!-- Bootstrap core CSS -->
@@ -41,7 +41,7 @@ session_start();
 
 if($_SESSION["adminUserName"]) {
 ?>
-    <h6 style="text-align: right;">Welcome <?php echo $_SESSION["adminUserName"];?>. <a href="logout.php" tite="Logout">Log out.</a></h6>
+   <?php include 'user_session.php' ?>
 
 
 

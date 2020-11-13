@@ -22,6 +22,7 @@ $_SESSION["email"] = $row['email'];
 $_SESSION["municipality"] = $row['municipality'];
 $_SESSION["province"] = $row['province'];
 $_SESSION["gender"] = $row['gender'];
+$_SESSION["profile_img"] = $row['profile_img'];
 
 
 
@@ -51,9 +52,9 @@ header("Location:passengersBalanceIndex.php");
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="https://v4-alpha.getbootstrap.com/favicon.ico">
+    <link rel="icon" href="img/atlantis_yohan_logo.png">
 
-    <title>Navbar Template for Bootstrap</title>
+    <title>Log In - Atlantis Yohan</title>
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/navbars/">
 
     <!-- Bootstrap core CSS -->
@@ -64,7 +65,7 @@ header("Location:passengersBalanceIndex.php");
     <link rel="stylesheet" type="text/css" href="mycustomstyle.css">
   </head>
 
-  <body>
+  <body style="background-image: url('img/bg2.jpg');">
 
      <?php include 'navSignUp.php'; ?>
 
@@ -72,20 +73,21 @@ header("Location:passengersBalanceIndex.php");
 
       <div class="jumbotron">
         <div class="col-sm-8 mx-auto">
-          <h1>To check your balance</h1>
-          <h4>please your credentials and password</h4>
-           <form id="reg2" name="frmUser" method="post" action="" align="center">
+
+
+<form id="reg2" name="frmUser" method="post" action="" align="center">
 
 <div id="reg2" class="message"><?php if($message!="") { echo $message; } ?></div>
 
+<img src="img/atlantis_yohan_logo.png" width="200px;"><br />
  Username<br>
  <input type="text" class="form-control" name="userName">
  <br>
  Password<br>
-<input type="password" class="form-control" name="password">
-<br><br>
+<input type="password" class="form-control" name="password"><br>
+<a href="#">Forgot your password?</a><br><br>
 <input type="submit" class="btn btn-primary" name="submit" value="Login">
-<input class="btn btn-primary" type="reset">
+
 </form>
 
         </div>
@@ -108,4 +110,6 @@ header("Location:passengersBalanceIndex.php");
     <script src="./Navbar Template for Bootstrap_files/ie10-viewport-bug-workaround.js.download"></script>
   
 
-</body></html>
+</body>
+
+</html>

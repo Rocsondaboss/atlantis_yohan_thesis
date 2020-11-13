@@ -71,7 +71,7 @@ session_start();
 
 if($_SESSION["adminUserName"]) {
 ?>
-    <h6 style="text-align: right;">Welcome <?php echo $_SESSION["adminUserName"]; ?>. <a href="logoutPayFare.php" tite="Logout">Log out.</a></h6>
+    <?php include 'user_session.php' ?>
 
       <div class="jumbotron">
         <div class="col-sm-12 mx-auto">
@@ -130,9 +130,6 @@ if (isset($_POST["submit"])) {
     <br />
 
 
-
-
-
 <center>
 <form name="myForm" action="passengerReloadConnect.php" onsubmit="return validateForm()" method="post">
 	Passenger ID
@@ -158,7 +155,7 @@ if (isset($_POST["submit"])) {
   Point value (<a style="text-decoration: none;"href="#" data-toggle="tooltip" data-placement="top" title="The current point value is being multiplied by the amount the user entered. The resulting points is added to the passenger's current total points earned.">?</a>)<br /> <input type="text" name="pointValue" readonly value="0.02"><br /><br />
 
 	<div id="boxindex" style="background-color: #03fc98;margin-left: 450px;margin-right:450px;">
-	Enter amount<br /> <input type="text" name="amount"><br /><br />
+	Enter amount<br /> <input type="number" name="amount"><br /><br />
 
 	  <input type="button" class="btn btn-primary" name="" value="ADD" onclick="add()"><br/>
 
@@ -194,20 +191,46 @@ function validateForm()
 
 	}
 
-function add(){
-    cbalance=parseFloat(myForm.cbalance.value);
-    amount=parseFloat(myForm.amount.value);
-    pointValue=parseFloat(myForm.pointValue.value);
-    CurrentTotalPoints=parseFloat(myForm.CurrentTotalPoints.value);
-
-    balance=cbalance+amount;
-    points=pointValue*amount;
-    TotalPoints=CurrentTotalPoints+points
 
 
-    myForm.balance.value=balance;
-    myForm.points.value=points;
-    myForm.TotalPoints.value=TotalPoints;
+
+
+
+
+
+function add() {
+   
+    var x = document.forms["myForm"]["amount"].value;
+    // Check if the user enters amount with negative value
+    if (x < 0)
+      {
+      alert("The amount cannot be negative.");
+       return false;
+      }
+
+    // Check if the user enters between 0 and 9.
+    else if (x < 10)
+      {
+      alert("At least P10 will be loaded to their account.");
+       return false;
+      }
+
+    // Otherwise
+    else {
+        cbalance=parseFloat(myForm.cbalance.value);
+        amount=parseFloat(myForm.amount.value);
+        pointValue=parseFloat(myForm.pointValue.value);
+        CurrentTotalPoints=parseFloat(myForm.CurrentTotalPoints.value);
+
+        balance=cbalance+amount;
+        points=pointValue*amount;
+        TotalPoints=CurrentTotalPoints+points
+
+
+        myForm.balance.value=balance;
+        myForm.points.value=points;
+        myForm.TotalPoints.value=TotalPoints;
+    }
 
 
 				}

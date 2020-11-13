@@ -13,9 +13,9 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="https://v4-alpha.getbootstrap.com/favicon.ico">
+    <link rel="icon" href="img/atlantis_yohan_logo.png">
 
-    <title>Navbar Template for Bootstrap</title>
+    <title><?php echo $_SESSION["firstName"]; ?> <?php echo $_SESSION["lastName"]; ?> – Atlantis Yohan</title>
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/navbars/">
 
     <!-- Bootstrap core CSS -->
@@ -168,6 +168,18 @@ li#infologin {
     font-weight: 600;
     color: #0062cc;
 }
+
+a#profile_update {
+    font-size: 12px;
+    background-color: #808080;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    color:white;
+    padding: 4px 8px;
+    text-decoration: none;
+}
+
 </style>
 
 <!---
@@ -183,19 +195,28 @@ li#infologin {
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-img">
-                            <img src="img/unknown-person-icon-27.png" alt=""/>
+                            <!--- <img src='<?php echo $_SESSION["profile_img"]; ?>' alt=""/> --->
+
+
                             
                         </div>
+
                     </div>
                     <div class="col-md-6">
                         <div class="profile-head">
                                     <h4>
-                                        <?php echo $_SESSION["firstName"]; ?> <?php echo $_SESSION["lastName"]; ?>
+                                        <?php echo $_SESSION["firstName"]; ?> <?php echo $_SESSION["lastName"]; ?> <a id="profile_update" href="profile_update.php">Update your account</a>
                                     </h4>
+
+                                    
                                    
                                     <h7>
                                         <?php echo $_SESSION["street"]; ?>, <?php echo $_SESSION["municipality"]; ?>, <?php echo $_SESSION["province"]; ?>
+
                                     </h7>
+
+
+                                    
                                    
                                    
                                     <!----  <p class="proile-rating">RANKINGS : <span>8/10</span></p> --->
@@ -219,6 +240,7 @@ li#infologin {
                         <div class="profile-work">
 
                             <?php include 'userProfileLeftNav.php' ?>
+                      
       
                         </div>
                     </div>
@@ -256,7 +278,7 @@ li#infologin {
                                                 <label>Your total points</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p><?php echo $_SESSION["TotalPoints"]; ?></p> (<a href="redeem.php">Redeem</a>)
+                                                <p><?php echo $_SESSION["TotalPoints"]; ?> <a id="profile_update" href="redeem.php">Redeem</a></p>
                                             </div>
                                         </div>
 

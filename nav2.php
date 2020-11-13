@@ -14,7 +14,7 @@
           </li>
 
             <li class="nav-item active">
-            <a class="nav-link" href="balance.php">Check your balance <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="balance.php">Passenger profile <span class="sr-only">(current)</span></a>
           </li>
          
             <li class="nav-item active">

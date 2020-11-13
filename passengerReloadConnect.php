@@ -68,3 +68,33 @@ if(isset($_POST['update']))
 
 
 ?>
+
+<!--- Write information --->
+<?php
+    
+
+    extract($_REQUEST);
+    $file=fopen("data-archives/reloadinghistory.txt","a");
+
+    fwrite($file,"Passenger ID : ");
+    fwrite($file, $id ."\n");
+
+    fwrite($file,"Name : ");
+    fwrite($file, $passengerName ."\n");
+
+    fwrite($file,"RFID : ");
+    fwrite($file, $rfidno ."\n");
+
+    fwrite($file,"Amount : Php ");
+    fwrite($file, $amount ."\n");
+
+    fwrite($file,"Reload time : ");
+    fwrite($file, $reloadDate ."\n\n");
+
+    fwrite($file,"********************************************");
+    fwrite($file, "\n");
+
+
+    fclose($file);
+
+ ?>

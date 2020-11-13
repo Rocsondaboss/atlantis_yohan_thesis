@@ -13,9 +13,9 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="https://v4-alpha.getbootstrap.com/favicon.ico">
+      <link rel="icon" href="img/atlantis_yohan_logo.png">
 
-    <title>Navbar Template for Bootstrap</title>
+      <title>Fare payment - Atlantis Yohan</title>
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/navbars/">
 
     <!-- Bootstrap core CSS -->
@@ -38,39 +38,28 @@ session_start();
 
 if($_SESSION["adminUserName"]) {
 ?>
-    <h6 style="text-align: right;">Welcome <?php echo $_SESSION["adminUserName"]; ?>. <a href="logoutPayFare.php" tite="Logout">Log out.</a></h6>
+    <?php include 'user_session.php' ?>
 
 
-
-
-
-      <div class="jumbotron">
-        <div class="col-sm-8 mx-auto">
-          <h1>Fare payment</h1>
- 
 
 
 <?php include 'farePaymentNavBar.php' ?>
 
 
+      <div class="jumbotron">
+        <div class="col-sm-8 mx-auto">
+          <h1>Fare payment</h1>
+
+
+
+
+
 <form method="post">
-<label style="font-size: 31px;font-family: Arial">Fare payment</label><br />
 <input type="text" name="rfidNoSearch" placeholder="Enter RFID #">
 <input type="submit" name="submit">
 <input type="reset" value="Reset">
 </form>
 
-
-<!---
-<form method="post">
-  <select name="rfidNoSearch" id="cars">
-    <option value=""></option>
-    <option value="457904">457904</option>
-    <option value="457905">457905</option>
-  </select>
-  <input type="submit" name="submit">
-  </form>
-  --->
 
 <?php
 
@@ -92,22 +81,26 @@ if (isset($_POST["submit"])) {
     ?>
     <br />
 
-<h1>Search</h1>
-<form action="isset - update.php" method="post">
-Passenger ID <textarea type="text" name="id" readonly><?php echo $row->id; ?></textarea>
-First name <textarea type="text" name="name" readonly><?php echo $row->firstName; ?></textarea>
-Last name <textarea type="text" name="name2" readonly><?php echo $row->lastName; ?></textarea>
-RFID <textarea type="text" name="rfidno" readonly><?php echo $row->rfidno; ?></textarea>
-Current balance <textarea type="text" name="currentbalance" readonly><?php echo $row->balance; ?></textarea>
-New balance <textarea type="text" id="demo" name="balance" readonly></textarea>
-Time of payment <textarea type="text" id="" name="paymentDate"><?php echo "" . date("Y/m/d") . ""; ?></textarea>
 
-Time of payment <textarea type="text" name="paymentTime"><?php date_default_timezone_set("Asia/Manila"); echo "" . date("h:i:sa"); ?></textarea>
+
+<form action="isset - update.php" method="post">
+Passenger ID<br/><input type="text" name="id" value='<?php echo $row->id; ?>' readonly><br/>
+
+First name<br/> <input type="text" name="name" value='<?php echo $row->firstName; ?>' readonly><br/>
+
+Last name <br/><input type="text" name="name2" value='<?php echo $row->lastName; ?>' readonly><br/>
+
+RFID<br/> <input type="text" name="rfidno" value='<?php echo $row->rfidno; ?>' readonly><br/>
+
+Current balance<br/><input type="text" value='<?php echo $row->balance; ?>' name="currentbalance" readonly><br/>
+
+New balance <br/> <textarea type="text" id="demo" name="balance" readonly></textarea><br/>
+
+Time of payment<br/> <input type="text" value='<?php echo "" . date("Y/m/d") . ""; ?>' id="" name="paymentDate" readonly="true"><br/>
+
+Time of payment <br/><input type="text" value='<?php date_default_timezone_set("Asia/Manila"); echo "" . date("h:i:sa"); ?>' name="paymentTime" readonly="true"><br/>
 
 <button style="background-color: #4CAF50;padding: 15px 32px;" type="submit" name="update">Proceed to payment</button>
-
-
-
 </form>
 
 <script>
@@ -116,6 +109,7 @@ var y = 50;
 var z = x - y;
 document.getElementById("demo").innerHTML =
 "" + z;
+
 </script>
 
 <script>
